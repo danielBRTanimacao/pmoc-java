@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,16 +16,13 @@ import lombok.Setter;
 @Setter
 public class ClientEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
-    private String adress;
-    private String building;
 
-    private String room;
-    private String to_walk;
-    private String department;
+    @OneToOne()
+    private AdressesEntity adress;
     
     private LocalDateTime date;
     private String applicant;
@@ -36,16 +34,8 @@ public class ClientEntity {
     private String temperature;
     private String gas_preassure;
 
-    private boolean filter;
-    private boolean cabinet;
-    private boolean evaporator;
-    private boolean grukks;
-    private boolean diffusers;
-    private boolean bactericidal;
-    private boolean paletts;
-    private boolean remote_control;
-    private boolean equipments;
-    private boolean cracks;
+    @OneToOne()
+    private AcessoriesEntity acessory;
 
     private String observations;
     private String signature;

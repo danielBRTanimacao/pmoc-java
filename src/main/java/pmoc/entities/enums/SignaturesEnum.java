@@ -1,6 +1,6 @@
 package pmoc.entities.enums;
 
-public enum signatureEnum {
+public enum SignaturesEnum {
     FREE,
     PRO,
     ULTIMATE
