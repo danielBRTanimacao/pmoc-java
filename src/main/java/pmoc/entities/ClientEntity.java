@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
+import pmoc.entities.extension.AcessoriesEntity;
+import pmoc.entities.extension.AddressesEntity;
 
 @Entity
 @Getter
@@ -19,23 +21,19 @@ public class ClientEntity {
     private Long id;
 
     private String name;
-
-    @OneToOne()
-    private AdressesEntity adress;
-    
-    private LocalDateTime date;
-    private String applicant;
-    private String position;
     private String phone;
 
+    @OneToOne
+    private AddressesEntity address;
+    
     private String equipment_name;
     private String voltage;
     private String temperature;
     private String gas_preassure;
-
-    @OneToOne()
+    
+    @OneToOne
     private AcessoriesEntity acessory;
-
+    
+    private LocalDateTime date;
     private String observations;
-    private String signature;
 }

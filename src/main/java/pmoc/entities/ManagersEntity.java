@@ -17,7 +17,7 @@ import pmoc.entities.enums.StatusEnum;
 @Entity
 @Getter
 @Setter
-public class SubscribersEntity {
+public class ManagersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
