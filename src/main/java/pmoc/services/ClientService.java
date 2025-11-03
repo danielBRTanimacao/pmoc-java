@@ -2,8 +2,11 @@ package pmoc.services;
 
 import org.springframework.data.domain.Page;
 
-import pmoc.entities.ClientEntity;
+import pmoc.DTOs.clientsDTO.ResponseClientDTO;
+import pmoc.entities.ClientsEntity;
 
 public interface ClientService {
-    Page<ClientEntity> getAllClients(int pageNum, int pageSize);
+    Page<ClientsEntity> getAllClients(int pageNum, int pageSize);
+
+    ResponseClientDTO createClient(ClientsEntity data);
 }

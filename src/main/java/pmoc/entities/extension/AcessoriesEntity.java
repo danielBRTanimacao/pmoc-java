@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-import pmoc.entities.ClientEntity;
+import pmoc.entities.ClientsEntity;
 
 @Entity
 @Getter
@@ -18,16 +18,9 @@ public class AcessoriesEntity {
     private Long id;
 
     @ManyToOne
-    private ClientEntity client;
+    private ClientsEntity client;
 
     private boolean filter;
-    private boolean cabinet;
-    private boolean evaporator;
-    private boolean grukks;
     private boolean diffusers;
-    private boolean bactericidal;
-    private boolean paletts;
-    private boolean remote_control;
     private boolean equipments;
-    private boolean cracks;
 }

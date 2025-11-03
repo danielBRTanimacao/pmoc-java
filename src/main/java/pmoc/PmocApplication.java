@@ -9,5 +9,4 @@ public class PmocApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PmocApplication.class, args);
 	}
-
 }

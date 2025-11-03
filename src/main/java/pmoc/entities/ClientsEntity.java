@@ -15,7 +15,7 @@ import pmoc.entities.extension.AddressesEntity;
 @Entity
 @Getter
 @Setter
-public class ClientEntity {
+public class ClientsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,11 +25,6 @@ public class ClientEntity {
 
     @OneToOne
     private AddressesEntity address;
-    
-    private String equipment_name;
-    private String voltage;
-    private String temperature;
-    private String gas_preassure;
     
     @OneToOne
     private AcessoriesEntity acessory;

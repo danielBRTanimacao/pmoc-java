@@ -16,8 +16,6 @@ public class AddressesEntity {
     private Long id;
     
     private String adress;
-    private String building;
     private String room;
-    private String to_walk;
     private String department;
 }

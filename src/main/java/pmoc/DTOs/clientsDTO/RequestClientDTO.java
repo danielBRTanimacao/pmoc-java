@@ -2,31 +2,22 @@ package pmoc.DTOs.clientsDTO;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record RequestClientDTO(
+    @NotBlank
     String name,
+    @NotBlank
     String phone,
 
+    @NotBlank
     String adress,
-    String building,
     String room,
-    String to_walk,
     String department,
-    
-    String equipment_name,
-    String voltage,
-    String temperature,
-    String gas_preassure,
 
     boolean filter,
-    boolean cabinet,
-    boolean evaporator,
-    boolean grukks,
     boolean diffusers,
-    boolean bactericidal,
-    boolean paletts,
-    boolean remote_control,
     boolean equipments,
-    boolean cracks,
 
     LocalDateTime date,
     String observations
