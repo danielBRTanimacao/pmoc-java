@@ -10,7 +10,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class MecanicsEntity {
+public class MechaniciansEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

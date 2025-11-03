@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pmoc.entities.MecanicsEntity;
+import pmoc.entities.MechaniciansEntity;
 
 @RequestMapping("/api/mecanics")
-public interface MecanicsController {
+public interface MechaniciansController {
     @GetMapping
-    ResponseEntity<Page<MecanicsEntity>> paginateAllMecanics(
+    ResponseEntity<Page<MechaniciansEntity>> paginateAllMecanics(
         @RequestParam int pageNum,
         @RequestParam(defaultValue = "25") int pageSize
     );
