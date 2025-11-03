@@ -1,6 +1,7 @@
 package pmoc.controllers.impl;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,10 @@ public class ClientsControllerImpl implements ClientsController {
     private final ClientService clientService;
 
     @Override
-    public Page<ClientEntity> paginateAllClients(int pageNum, int pageSize) {
-        return clientService.getAllClients(pageNum, pageSize);
+    public ResponseEntity<Page<ClientEntity>> paginateAllClients(int pageNum, int pageSize) {
+        return ResponseEntity.ok().body(clientService.getAllClients(pageNum, pageSize));
     }
+
+   
     
 }

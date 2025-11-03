@@ -1,9 +1,9 @@
 package pmoc.services.impl;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -19,8 +19,7 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public Page<ClientEntity> getAllClients(int pageNum, int pageSize) {
-        // Corrigir aqui
-        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        Pageable pageable = PageRequest.of(pageNum, pageSize, Sort.by("id").descending());
         return clientRepository.findAll(pageable);
     }
     
