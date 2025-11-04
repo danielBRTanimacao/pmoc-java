@@ -1,5 +1,7 @@
 package pmoc.entities;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,11 +27,14 @@ public class OrderEntity {
 
     private OrderStatusEnum status;
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long position;
     private String problem;
 
     @OneToOne
     private EquipamentsEntity equipaments_id;
+
+    private BigDecimal value;
 
     private String observations;
 }
