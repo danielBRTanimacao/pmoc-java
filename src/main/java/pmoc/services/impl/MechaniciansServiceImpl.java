@@ -25,9 +25,8 @@ public class MechaniciansServiceImpl implements MechaniciansService {
     }
 
     @Override
-    public MechaniciansEntity createNewMecanic(RequestMechanicianDTO data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createNewMecanic'");
+    public MechaniciansEntity createNewMecanic(MechaniciansEntity data) {
+        return mechaniciansRepository.save(data);
     }
     
 }
