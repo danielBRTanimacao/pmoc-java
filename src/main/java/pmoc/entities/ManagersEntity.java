@@ -11,8 +11,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.Getter;
 import lombok.Setter;
-import pmoc.entities.enums.SignaturesEnum;
-import pmoc.entities.enums.StatusEnum;
+import pmoc.entities.enums.manager.SignaturesEnum;
+import pmoc.entities.enums.manager.StatusEnum;
 
 @Entity
 @Getter

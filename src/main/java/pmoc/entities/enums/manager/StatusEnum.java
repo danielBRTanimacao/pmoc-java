@@ -1,4 +1,4 @@
-package pmoc.entities.enums;
+package pmoc.entities.enums.manager;
 
 public enum StatusEnum {
     PENDING,

@@ -12,7 +12,7 @@ import pmoc.entities.ClientsEntity;
 @Entity
 @Getter
 @Setter
-public class AcessoriesEntity {
+public class EquipamentsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
