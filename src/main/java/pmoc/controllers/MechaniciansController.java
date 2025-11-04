@@ -12,7 +12,7 @@ import pmoc.entities.MechaniciansEntity;
 public interface MechaniciansController {
     @GetMapping
     ResponseEntity<Page<MechaniciansEntity>> paginateAllMecanics(
-        @RequestParam int pageNum,
+        @RequestParam(defaultValue = "0") int pageNum,
         @RequestParam(defaultValue = "25") int pageSize
     );
 }

@@ -27,7 +27,7 @@ public class ClientServiceImpl implements ClientService{
     @Override
     public ResponseClientDTO createClient(ClientsEntity data) {
         clientRepository.save(data);
-        return new ResponseClientDTO(data.getName(), data.getAddress().getAdress());
+        return new ResponseClientDTO(data.getName(), data.getAddress());
     }
     
 }

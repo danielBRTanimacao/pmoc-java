@@ -11,7 +11,7 @@ public record RequestClientDTO(
     String phone,
 
     @NotBlank
-    String adress,
+    String address,
     String room,
     String department,
 

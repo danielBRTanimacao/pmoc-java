@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-import pmoc.entities.ClientsEntity;
+import pmoc.entities.OrderEntity;
 
 @Entity
 @Getter
@@ -18,7 +18,7 @@ public class EquipamentsEntity {
     private Long id;
 
     @ManyToOne
-    private ClientsEntity client;
+    private OrderEntity order_id;
 
     private boolean filter;
     private boolean diffusers;

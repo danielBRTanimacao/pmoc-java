@@ -1,13 +1,16 @@
 package pmoc.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.Getter;
 import lombok.Setter;
-import pmoc.entities.extension.AddressesEntity;
 
 @Entity
 @Getter
@@ -19,7 +22,25 @@ public class ClientsEntity {
 
     private String name;
     private String phone;
+    
+    private String address;
+    private String room;
+    private String department;
 
     @OneToOne
-    private AddressesEntity address;
+    private OrderEntity order_id;
+
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
+
+    @PrePersist
+    void onCreate(){
+        this.created_at = LocalDateTime.now();
+        this.updated_at = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void onUpdate() {
+        this.updated_at = LocalDateTime.now();
+    }
 }
