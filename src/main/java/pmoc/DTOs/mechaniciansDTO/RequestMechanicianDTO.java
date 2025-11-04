@@ -1,5 +1,9 @@
 package pmoc.DTOs.mechaniciansDTO;
 
-public record RequestMechanicianDTO() {
-    
-}
+import jakarta.validation.constraints.NotBlank;
+
+public record RequestMechanicianDTO(
+    @NotBlank
+    String name,
+    @NotBlank
+    String phone) {}
