@@ -2,9 +2,9 @@ package pmoc.services;
 
 import org.springframework.data.domain.Page;
 
-import pmoc.entities.MechaniciansEntity;
+import pmoc.entities.MechanicsEntity;
 
 public interface MechaniciansService {
-    Page<MechaniciansEntity> getAllMechanicias(int pageNum, int pageSize);
-    MechaniciansEntity createNewMecanic(MechaniciansEntity data);
+    Page<MechanicsEntity> getAllMechanicias(int pageNum, int pageSize);
+    MechanicsEntity createNewMecanic(MechanicsEntity data);
 }

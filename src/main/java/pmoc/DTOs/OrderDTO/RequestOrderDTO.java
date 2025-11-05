@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 
 import jakarta.validation.constraints.NotBlank;
 import pmoc.entities.ClientsEntity;
-import pmoc.entities.MechaniciansEntity;
+import pmoc.entities.MechanicsEntity;
 import pmoc.entities.enums.ordered.OrderStatusEnum;
 
 public record RequestOrderDTO(
     @NotBlank
     ClientsEntity clientId,
     @NotBlank
-    MechaniciansEntity mecId,
+    MechanicsEntity mecId,
 
     OrderStatusEnum status,
     @NotBlank

@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import pmoc.DTOs.clientsDTO.ResponseClientDTO;
 import pmoc.entities.ClientsEntity;
-import pmoc.repositories.ClientRepository;
+import pmoc.exceptions.customs.NotFoundException;
+import pmoc.repositories.ClientsRepository;
 import pmoc.services.ClientService;
 
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService{
 
-    private final ClientRepository clientRepository;
+    private final ClientsRepository clientRepository;
 
     @Override
     public Page<ClientsEntity> getAllClients(int pageNum, int pageSize) {
@@ -28,6 +29,14 @@ public class ClientServiceImpl implements ClientService{
     public ResponseClientDTO createClient(ClientsEntity data) {
         clientRepository.save(data);
         return new ResponseClientDTO(data.getName(), data.getAddress());
+    }
+
+    @Override
+    public ResponseClientDTO updtClient(ClientsEntity data, Long id) {
+        if (clientRepository.findById(id).isEmpty()) {
+            throw new NotFoundException("Client with id={" + id + "} not found");
+        }
+        return null;
     }
 
     @Override

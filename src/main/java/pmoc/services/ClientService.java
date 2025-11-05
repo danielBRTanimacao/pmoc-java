@@ -8,5 +8,6 @@ import pmoc.entities.ClientsEntity;
 public interface ClientService {
     Page<ClientsEntity> getAllClients(int pageNum, int pageSize);
     ResponseClientDTO createClient(ClientsEntity data);
+    ResponseClientDTO updtClient(ClientsEntity data, Long id);
     void delClient(Long id);
 }

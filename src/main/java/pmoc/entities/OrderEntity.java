@@ -26,7 +26,7 @@ public class OrderEntity {
     private ClientsEntity clientId;
     @ManyToOne
     @JsonBackReference
-    private MechaniciansEntity mecId;
+    private MechanicsEntity mecId;
 
     private OrderStatusEnum status;
 

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import pmoc.entities.ClientsEntity;
 
-public interface ClientRepository extends JpaRepository<ClientsEntity, Long> {
+public interface ClientsRepository extends JpaRepository<ClientsEntity, Long> {
     
 }

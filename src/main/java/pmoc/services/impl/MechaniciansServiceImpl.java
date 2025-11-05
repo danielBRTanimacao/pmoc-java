@@ -7,25 +7,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import pmoc.DTOs.mechaniciansDTO.RequestMechanicianDTO;
-import pmoc.entities.MechaniciansEntity;
-import pmoc.repositories.MechaniciansRepository;
+import pmoc.entities.MechanicsEntity;
+import pmoc.repositories.MechanicsRepository;
 import pmoc.services.MechaniciansService;
 
 @Service
 @RequiredArgsConstructor
 public class MechaniciansServiceImpl implements MechaniciansService {
 
-    private final MechaniciansRepository mechaniciansRepository;
+    private final MechanicsRepository mechaniciansRepository;
 
     @Override
-    public Page<MechaniciansEntity> getAllMechanicias(int pageNum, int pageSize) {
+    public Page<MechanicsEntity> getAllMechanicias(int pageNum, int pageSize) {
         Pageable page = PageRequest.of(pageNum, pageSize);
         return mechaniciansRepository.findAll(page);
     }
 
     @Override
-    public MechaniciansEntity createNewMecanic(MechaniciansEntity data) {
+    public MechanicsEntity createNewMecanic(MechanicsEntity data) {
         return mechaniciansRepository.save(data);
     }
     

@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import pmoc.DTOs.mechaniciansDTO.RequestMechanicianDTO;
-import pmoc.entities.MechaniciansEntity;
+import pmoc.entities.MechanicsEntity;
 
 @RequestMapping("/api/mecanics")
 public interface MechaniciansController {
     @GetMapping
-    ResponseEntity<Page<MechaniciansEntity>> paginateAllMecanics(
+    ResponseEntity<Page<MechanicsEntity>> paginateAllMecanics(
         @RequestParam(defaultValue = "0") int pageNum,
         @RequestParam(defaultValue = "25") int pageSize
     );
 
     @PostMapping
-    ResponseEntity<MechaniciansEntity> addNewMecanic(@Valid @RequestBody RequestMechanicianDTO data);
+    ResponseEntity<MechanicsEntity> addNewMecanic(@Valid @RequestBody RequestMechanicianDTO data);
 }

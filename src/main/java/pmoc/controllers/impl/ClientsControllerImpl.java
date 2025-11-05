@@ -35,6 +35,15 @@ public class ClientsControllerImpl implements ClientsController {
     }
 
     @Override
+    public ResponseEntity<ResponseClientDTO> updateClient(RequestClientDTO data, Long id) {
+        ClientsEntity preClient = new ClientsEntity();
+        preClient.setName(data.name());
+        preClient.setPhone(data.phone());
+        preClient.setAddress(data.address());
+        return ResponseEntity.ok().body(clientService.updtClient(preClient, id));
+    }
+
+    @Override
     public ResponseEntity<?> deleteClient(@Valid Long id) {
         clientService.delClient(id);
         return ResponseEntity.noContent().build();
