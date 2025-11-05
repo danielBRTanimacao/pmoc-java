@@ -29,5 +29,10 @@ public class ClientServiceImpl implements ClientService{
         clientRepository.save(data);
         return new ResponseClientDTO(data.getName(), data.getAddress());
     }
+
+    @Override
+    public void delClient(Long id) {
+        clientRepository.deleteById(id);
+    }
     
 }

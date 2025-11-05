@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import pmoc.entities.ClientsEntity;
 import pmoc.entities.MechaniciansEntity;
 import pmoc.entities.enums.ordered.OrderStatusEnum;
-import pmoc.entities.extension.EquipamentsEntity;
 
 public record RequestOrderDTO(
     @NotBlank
@@ -18,8 +17,6 @@ public record RequestOrderDTO(
     @NotBlank
     String problem,
 
-    @NotBlank
-    EquipamentsEntity equipaments_id,
     @NotBlank
     BigDecimal value,
     String observations
