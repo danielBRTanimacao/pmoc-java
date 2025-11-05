@@ -3,7 +3,6 @@ package pmoc.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -29,7 +28,7 @@ public class MechaniciansEntity {
     private String name;
     private String phone;
 
-    @OneToMany(mappedBy = "mecId" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mecId" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private List<OrderEntity> order_id;
 
