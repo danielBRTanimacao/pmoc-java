@@ -30,10 +30,10 @@ public class OrderEntity {
 
     private OrderStatusEnum status;
 
-    private Long position;
+    private Long orderPosition;
     private String problem;
 
-    private BigDecimal value;
+    private BigDecimal payment;
 
     private String observations;
 }
