@@ -33,10 +33,15 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public ResponseClientDTO updtClient(ClientsEntity data, Long id) {
-        if (clientRepository.findById(id).isEmpty()) {
-            throw new NotFoundException("Client with id={" + id + "} not found");
-        }
-        return null;
+        ClientsEntity preSave = clientRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Client with id=" + id + " not found")
+        );
+
+        preSave.setName(data.getName());
+        preSave.setAddress(data.getAddress());
+        preSave.setPhone(data.getPhone());
+        clientRepository.save(preSave);
+        return new ResponseClientDTO(preSave.getName(), preSave.getAddress());
     }
 
     @Override
