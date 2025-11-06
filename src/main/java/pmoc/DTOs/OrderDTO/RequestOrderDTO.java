@@ -2,22 +2,25 @@ package pmoc.DTOs.OrderDTO;
 
 import java.math.BigDecimal;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import pmoc.entities.ClientsEntity;
 import pmoc.entities.MechanicsEntity;
 import pmoc.entities.enums.ordered.OrderStatusEnum;
 
 public record RequestOrderDTO(
-    @NotBlank
-    ClientsEntity clientId,
-    @NotBlank
-    MechanicsEntity mecId,
+    @NotNull
+    Long clientId,
+    @NotNull
+    Long mecId,
 
-    OrderStatusEnum status,
     @NotBlank
     String problem,
 
-    @NotBlank
+    @DecimalMin(value = "5.0")
+    @Digits(integer=3, fraction=2)
     BigDecimal value,
     String observations
 ) {}
