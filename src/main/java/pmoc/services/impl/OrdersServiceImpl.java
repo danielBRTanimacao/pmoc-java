@@ -5,11 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import pmoc.DTOs.OrderDTO.ResponseOrder;
-import pmoc.entities.ClientsEntity;
+import pmoc.DTOs.OrderDTO.ResponseOrderDTO;
 import pmoc.entities.OrderEntity;
-import pmoc.repositories.ClientsRepository;
-import pmoc.repositories.MechanicsRepository;
 import pmoc.repositories.OrdersRepository;
 import pmoc.services.OrdersService;
 
@@ -25,9 +22,9 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public ResponseOrder createOrder(OrderEntity order) {
+    public ResponseOrderDTO createOrder(OrderEntity order) {
         ordersRepository.save(order);
-        return new ResponseOrder(
+        return new ResponseOrderDTO(
                 order.getClientId().getName(),
                 order.getMecId().getName(),
                 order.getOrderPosition(),

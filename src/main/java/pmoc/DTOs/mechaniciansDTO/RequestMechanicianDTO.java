@@ -6,4 +6,5 @@ public record RequestMechanicianDTO(
     @NotBlank
     String name,
     @NotBlank
-    String phone) {}
+    String phone
+) {}

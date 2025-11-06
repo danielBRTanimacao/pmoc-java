@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pmoc.DTOs.OrderDTO.RequestOrderDTO;
-import pmoc.DTOs.OrderDTO.ResponseOrder;
+import pmoc.DTOs.OrderDTO.ResponseOrderDTO;
 import pmoc.entities.OrderEntity;
 
 @RequestMapping("/api/orders")
@@ -17,5 +17,5 @@ public interface OrderController {
     );
 
     @PostMapping
-    ResponseEntity<ResponseOrder> createNewOrder(@Valid @RequestBody RequestOrderDTO data);
+    ResponseEntity<ResponseOrderDTO> createNewOrder(@Valid @RequestBody RequestOrderDTO data);
 }

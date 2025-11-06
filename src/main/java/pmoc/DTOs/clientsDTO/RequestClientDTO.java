@@ -12,5 +12,4 @@ public record RequestClientDTO(
     String address,
     String room,
     String department
-) {
-}
+) {}
