@@ -40,7 +40,7 @@ public class OrderEntity {
     @PrePersist
     void onCreate() {
         this.setStatus(OrderStatusEnum.PENDING);
-        this.orderPosition += 1L;
+        this.orderPosition = this.id + 1L;
 
         this.created_at = LocalDateTime.now();
         this.updated_at = LocalDateTime.now();

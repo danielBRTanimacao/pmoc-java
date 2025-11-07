@@ -23,7 +23,7 @@ public class FindEntitiesHandler {
 
     public MechanicsEntity findMechanicById(Long id) {
         return mechanicsRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Client with id " + id + " Not found")
+                () -> new NotFoundException("Mechanic with id " + id + " Not found")
         );
     }
 

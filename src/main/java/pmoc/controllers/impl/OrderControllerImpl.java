@@ -20,7 +20,6 @@ public class OrderControllerImpl implements OrderController {
     private final OrdersService ordersService;
 
     private final OrderMapper orderMapper;
-    private final FindEntitiesHandler findEntitiesHandler;
 
     @Override
     public ResponseEntity<Page<OrderEntity>> pageableAllOrders(int pageNum, int pageSize) {
@@ -29,23 +28,13 @@ public class OrderControllerImpl implements OrderController {
 
     @Override
     public ResponseEntity<ResponseOrderDTO> createNewOrder(RequestOrderDTO data) {
-
         OrderEntity preOrder = orderMapper.toEntity(data);
-        preOrder.setClientId(findEntitiesHandler.findClientById(data.clientId()));
-        preOrder.setMecId(findEntitiesHandler.findMechanicById(data.mecId()));
-
         return new ResponseEntity<>(ordersService.createOrder(preOrder), HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<OrderEntity> updateOrder(RequestOrderDTO data, Long id) {
-        OrderEntity preOrder = new OrderEntity();
-        preOrder.setClientId(findEntitiesHandler.findClientById(data.clientId()));
-        preOrder.setMecId(findEntitiesHandler.findMechanicById(data.mecId()));
-        preOrder.setProblem(data.problem());
-        preOrder.setPayment(data.value());
-        preOrder.setObservations(data.observations());
-
+        OrderEntity preOrder = orderMapper.toEntity(data);
         return ResponseEntity.ok().body(ordersService.updtOrder(preOrder , id));
     }
 

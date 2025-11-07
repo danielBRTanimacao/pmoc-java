@@ -1,18 +1,23 @@
 package pmoc.mapper;
 
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import lombok.RequiredArgsConstructor;
+import org.mapstruct.*;
 import pmoc.DTOs.OrderDTO.RequestOrderDTO;
 import pmoc.DTOs.OrderDTO.ResponseOrderDTO;
+import pmoc.components.FindEntitiesHandler;
 import pmoc.entities.OrderEntity;
 
 @Mapper(componentModel = "spring")
-public interface OrderMapper {
-    OrderEntity toEntity(RequestOrderDTO data);
-    ResponseOrderDTO toDTO(OrderEntity data);
+@RequiredArgsConstructor
+public abstract class OrderMapper {
+    protected final FindEntitiesHandler findEntitiesHandler;
+
+    @Mapping(target = "clientId", expression = "java(findEntitiesHandler.findClientById(data.clientId()))")
+    @Mapping(target = "mecId", expression = "java(findEntitiesHandler.findMechanicById(data.mecId()))")
+    public abstract OrderEntity toEntity(RequestOrderDTO data);
+
+    public abstract ResponseOrderDTO toDTO(OrderEntity data);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    OrderEntity partialUpdate(RequestOrderDTO dto, @MappingTarget OrderEntity entity);
+    public abstract OrderEntity partialUpdate(RequestOrderDTO dto, @MappingTarget OrderEntity entity);
 }
