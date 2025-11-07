@@ -37,4 +37,22 @@ public class OrderControllerImpl implements OrderController {
 
         return ResponseEntity.ok().body(ordersService.createOrder(preOrder));
     }
+
+    @Override
+    public ResponseEntity<OrderEntity> updateOrder(RequestOrderDTO data, Long id) {
+        OrderEntity preOrder = new OrderEntity();
+        preOrder.setClientId(findEntitiesHandler.findClientById(data.clientId()));
+        preOrder.setMecId(findEntitiesHandler.findMechanicById(data.mecId()));
+        preOrder.setProblem(data.problem());
+        preOrder.setPayment(data.value());
+        preOrder.setObservations(data.observations());
+
+        return ResponseEntity.ok().body(ordersService.updtOrder(preOrder , id));
+    }
+
+    @Override
+    public ResponseEntity<?> deleteOrder(Long id) {
+        ordersService.delOrder(id);
+        return ResponseEntity.noContent().build();
+    }
 }

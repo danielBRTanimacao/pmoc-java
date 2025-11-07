@@ -7,4 +7,6 @@ import pmoc.entities.OrderEntity;
 public interface OrdersService {
     Page<OrderEntity> getAllOrders(int pagNum, int pageSize);
     ResponseOrderDTO createOrder(OrderEntity order);
+    OrderEntity updtOrder(OrderEntity data, Long id);
+    void delOrder(Long id);
 }

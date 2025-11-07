@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pmoc.DTOs.OrderDTO.ResponseOrderDTO;
 import pmoc.entities.OrderEntity;
+import pmoc.exceptions.customs.NotFoundException;
 import pmoc.repositories.OrdersRepository;
 import pmoc.services.OrdersService;
 
@@ -30,5 +31,27 @@ public class OrdersServiceImpl implements OrdersService {
                 order.getOrderPosition(),
                 order.getPayment()
         );
+    }
+
+    @Override
+    public OrderEntity updtOrder(OrderEntity data, Long id) {
+        OrderEntity order = ordersRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Order with id " + id + " not found")
+        );
+
+        order.setClientId(data.getClientId());
+        order.setMecId(data.getMecId());
+        order.setPayment(data.getPayment());
+        order.setProblem(data.getProblem());
+        order.setObservations(data.getObservations());
+        return ordersRepository.save(order);
+    }
+
+    @Override
+    public void delOrder(Long id) {
+        OrderEntity order = ordersRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Order with id " + id + " not found")
+        );
+        ordersRepository.delete(order);
     }
 }

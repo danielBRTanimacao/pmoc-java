@@ -18,4 +18,10 @@ public interface OrderController {
 
     @PostMapping
     ResponseEntity<ResponseOrderDTO> createNewOrder(@Valid @RequestBody RequestOrderDTO data);
+
+    @PutMapping("/{id}")
+    ResponseEntity<OrderEntity> updateOrder(@Valid @RequestBody RequestOrderDTO data, @PathVariable Long id);
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deleteOrder(@PathVariable Long id);
 }

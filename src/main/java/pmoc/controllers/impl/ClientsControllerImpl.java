@@ -1,6 +1,7 @@
 package pmoc.controllers.impl;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class ClientsControllerImpl implements ClientsController {
         preClient.setPhone(data.phone());
         preClient.setAddress(data.address());
 
-        return ResponseEntity.ok().body(clientService.createClient(preClient));
+        return new ResponseEntity<>(clientService.createClient(preClient), HttpStatus.CREATED);
     }
 
     @Override
