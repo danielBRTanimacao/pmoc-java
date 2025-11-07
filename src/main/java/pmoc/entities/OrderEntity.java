@@ -1,14 +1,11 @@
 package pmoc.entities;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import pmoc.entities.enums.ordered.OrderStatusEnum;
@@ -36,4 +33,21 @@ public class OrderEntity {
     private BigDecimal payment;
 
     private String observations;
+
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
+
+    @PrePersist
+    void onCreate() {
+        this.setStatus(OrderStatusEnum.PENDING);
+        this.orderPosition += 1L;
+
+        this.created_at = LocalDateTime.now();
+        this.updated_at = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void onUpdate() {
+        this.updated_at = LocalDateTime.now();
+    }
 }

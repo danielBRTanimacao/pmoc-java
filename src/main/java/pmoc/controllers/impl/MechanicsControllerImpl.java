@@ -2,6 +2,7 @@ package pmoc.controllers.impl;
 
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,11 +17,11 @@ import pmoc.services.MechanicsService;
 @RequiredArgsConstructor
 public class MechanicsControllerImpl implements MechanicsController {
     
-    private final MechanicsService mechaniciansService;
+    private final MechanicsService mechanicsService;
     
     @Override
     public ResponseEntity<Page<MechanicsEntity>> paginateAllMechanics(int pageNum, int pageSize) {
-        return ResponseEntity.ok().body(mechaniciansService.getAllMechanics(pageNum, pageSize));
+        return ResponseEntity.ok().body(mechanicsService.getAllMechanics(pageNum, pageSize));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class MechanicsControllerImpl implements MechanicsController {
 
         preMechanic.setName(data.name());
         preMechanic.setPhone(data.phone());
-        return ResponseEntity.ok().body(mechaniciansService.createNewMechanic(preMechanic));
+        return new ResponseEntity<>(mechanicsService.createNewMechanic(preMechanic), HttpStatus.CREATED);
     }
 
     @Override
@@ -38,12 +39,12 @@ public class MechanicsControllerImpl implements MechanicsController {
 
         preMechanic.setName(data.name());
         preMechanic.setPhone(data.phone());
-        return ResponseEntity.ok().body(mechaniciansService.updtMechanic(preMechanic, id));
+        return ResponseEntity.ok().body(mechanicsService.updtMechanic(preMechanic, id));
     }
 
     @Override
     public ResponseEntity<?> deleteMechanic(Long id) {
-        mechaniciansService.delMechanic(id);
+        mechanicsService.delMechanic(id);
         return ResponseEntity.noContent().build();
     }
 

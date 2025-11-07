@@ -24,7 +24,7 @@ public class ManagersEntity {
 
     private String username;
     private String email;
-    private String passsword;
+    private String password;
     private String token;
 
     private StatusEnum status;
