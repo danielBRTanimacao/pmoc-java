@@ -21,6 +21,6 @@ public record RequestOrderDTO(
 
     @DecimalMin(value = "5.0")
     @Digits(integer=3, fraction=2)
-    BigDecimal value,
+    BigDecimal price,
     String observations
 ) {}

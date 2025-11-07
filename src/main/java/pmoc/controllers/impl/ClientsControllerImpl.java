@@ -11,6 +11,7 @@ import pmoc.DTOs.clientsDTO.RequestClientDTO;
 import pmoc.DTOs.clientsDTO.ResponseClientDTO;
 import pmoc.controllers.ClientsController;
 import pmoc.entities.ClientsEntity;
+import pmoc.mapper.ClientMapper;
 import pmoc.services.ClientService;
 
 @RestController
@@ -18,6 +19,7 @@ import pmoc.services.ClientService;
 public class ClientsControllerImpl implements ClientsController {
 
     private final ClientService clientService;
+    private final ClientMapper clientMapper;
 
     @Override
     public ResponseEntity<Page<ClientsEntity>> paginateAllClients(int pageNum, int pageSize) {
@@ -26,21 +28,14 @@ public class ClientsControllerImpl implements ClientsController {
 
     @Override
     public ResponseEntity<ResponseClientDTO> addNewClient(@Valid RequestClientDTO data) {
-        ClientsEntity preClient = new ClientsEntity();
-
-        preClient.setName(data.name());
-        preClient.setPhone(data.phone());
-        preClient.setAddress(data.address());
+        ClientsEntity preClient = clientMapper.toEntity(data);
 
         return new ResponseEntity<>(clientService.createClient(preClient), HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<ResponseClientDTO> updateClient(RequestClientDTO data, Long id) {
-        ClientsEntity preClient = new ClientsEntity();
-        preClient.setName(data.name());
-        preClient.setPhone(data.phone());
-        preClient.setAddress(data.address());
+        ClientsEntity preClient = clientMapper.toEntity(data);
         return ResponseEntity.ok().body(clientService.updtClient(preClient, id));
     }
 

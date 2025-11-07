@@ -7,7 +7,6 @@ import pmoc.entities.MechanicsEntity;
 import pmoc.exceptions.customs.NotFoundException;
 import pmoc.repositories.ClientsRepository;
 import pmoc.repositories.MechanicsRepository;
-import pmoc.repositories.OrdersRepository;
 
 @Component
 @RequiredArgsConstructor
