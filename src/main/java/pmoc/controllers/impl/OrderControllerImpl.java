@@ -7,10 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import pmoc.DTOs.OrderDTO.RequestOrderDTO;
 import pmoc.DTOs.OrderDTO.ResponseOrderDTO;
-import pmoc.components.FindEntitiesHandler;
 import pmoc.controllers.OrderController;
 import pmoc.entities.OrderEntity;
-import pmoc.entities.enums.ordered.OrderStatusEnum;
 import pmoc.mapper.OrderMapper;
 import pmoc.services.OrdersService;
 
