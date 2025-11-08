@@ -11,6 +11,7 @@ import pmoc.DTOs.mechaniciansDTO.RequestMechanicianDTO;
 import pmoc.DTOs.mechaniciansDTO.ResponseMechanicDTO;
 import pmoc.controllers.MechanicsController;
 import pmoc.entities.MechanicsEntity;
+import pmoc.mapper.MechanicMapper;
 import pmoc.services.MechanicsService;
 
 @RestController
@@ -18,6 +19,7 @@ import pmoc.services.MechanicsService;
 public class MechanicsControllerImpl implements MechanicsController {
     
     private final MechanicsService mechanicsService;
+    private final MechanicMapper mechanicMapper;
     
     @Override
     public ResponseEntity<Page<MechanicsEntity>> paginateAllMechanics(int pageNum, int pageSize) {
@@ -26,19 +28,13 @@ public class MechanicsControllerImpl implements MechanicsController {
 
     @Override
     public ResponseEntity<MechanicsEntity> addNewMechanic(RequestMechanicianDTO data) {
-        MechanicsEntity preMechanic = new MechanicsEntity();
-
-        preMechanic.setName(data.name());
-        preMechanic.setPhone(data.phone());
+        MechanicsEntity preMechanic = mechanicMapper.toEntity(data);
         return new ResponseEntity<>(mechanicsService.createNewMechanic(preMechanic), HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<ResponseMechanicDTO> updateMechanic(RequestMechanicianDTO data, Long id) {
-        MechanicsEntity preMechanic = new MechanicsEntity();
-
-        preMechanic.setName(data.name());
-        preMechanic.setPhone(data.phone());
+        MechanicsEntity preMechanic = mechanicMapper.toEntity(data);
         return ResponseEntity.ok().body(mechanicsService.updtMechanic(preMechanic, id));
     }
 
