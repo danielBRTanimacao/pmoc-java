@@ -6,6 +6,7 @@ import pmoc.DTOs.OrderDTO.RequestOrderDTO;
 import pmoc.DTOs.OrderDTO.ResponseOrderDTO;
 import pmoc.components.FindEntitiesHandler;
 import pmoc.entities.OrderEntity;
+import pmoc.entities.enums.ordered.OrderStatusEnum;
 import pmoc.mapper.OrderMapper;
 
 @Component
@@ -24,8 +25,13 @@ public class OrderMapperImpl implements OrderMapper {
         order.setClientId(findEntity.findClientById(data.clientId()));
         order.setMecId(findEntity.findMechanicById(data.mecId()));
         order.setProblem(data.problem());
-        order.setPayment(data.price());
+        order.setPrice(data.price());
         order.setObservations(data.observations());
+
+        if (data.status() == null) {
+            order.setStatus(OrderStatusEnum.PENDING);
+        }
+        order.setStatus(data.status());
 
         return order;
     }
@@ -38,8 +44,7 @@ public class OrderMapperImpl implements OrderMapper {
         return new ResponseOrderDTO(
                 data.getClientId().getName(),
                 data.getMecId().getName(),
-                data.getOrderPosition(),
-                data.getPayment()
+                data.getPrice()
         );
     }
 
@@ -58,8 +63,8 @@ public class OrderMapperImpl implements OrderMapper {
         if (data.getProblem() != null) {
             updtEntity.setProblem(data.getProblem());
         }
-        if (data.getPayment() != null) {
-            updtEntity.setPayment(data.getPayment());
+        if (data.getPrice() != null) {
+            updtEntity.setPrice(data.getPrice());
         }
         if (data.getObservations() != null) {
             updtEntity.setObservations(data.getObservations());

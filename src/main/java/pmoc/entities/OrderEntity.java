@@ -8,11 +8,16 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pmoc.entities.enums.ordered.OrderStatusEnum;
 
 @Entity
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,27 +32,14 @@ public class OrderEntity {
 
     private OrderStatusEnum status;
 
-    private Long orderPosition;
     private String problem;
 
     private BigDecimal price;
 
     private String observations;
 
+    @CreatedDate
     private LocalDateTime created_at;
+    @LastModifiedDate
     private LocalDateTime updated_at;
-
-    @PrePersist
-    void onCreate() {
-        this.setStatus(OrderStatusEnum.PENDING);
-        this.orderPosition = this.id + 1L;
-
-        this.created_at = LocalDateTime.now();
-        this.updated_at = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    void onUpdate() {
-        this.updated_at = LocalDateTime.now();
-    }
 }

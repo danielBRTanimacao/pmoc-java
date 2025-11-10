@@ -38,7 +38,7 @@ public class OrdersServiceImpl implements OrdersService {
 
         order = orderMapper.partialUpdate(order, data);
         ordersRepository.save(order);
-        return new ResponseOrderDTO(order.getClientId().getName(), order.getMecId().getName(), order.getOrderPosition(), order.getPrice());
+        return orderMapper.toDTO(order);
     }
 
     @Override

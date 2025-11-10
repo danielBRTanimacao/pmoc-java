@@ -6,6 +6,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import pmoc.entities.enums.ordered.OrderStatusEnum;
 
 public record RequestOrderDTO(
     @NotNull
@@ -13,6 +14,7 @@ public record RequestOrderDTO(
     @NotNull
     Long mecId,
 
+    OrderStatusEnum status,
     @NotBlank
     String problem,
 
