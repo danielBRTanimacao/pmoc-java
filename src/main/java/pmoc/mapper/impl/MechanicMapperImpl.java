@@ -14,9 +14,24 @@ public class MechanicMapperImpl implements MechanicMapper {
             return null;
         }
         MechanicsEntity entity = new MechanicsEntity();
-        entity.setName(data.phone());
+        entity.setName(data.name());
         entity.setPhone(data.phone());
 
         return entity;
+    }
+
+    @Override
+    public MechanicsEntity partialUpdate(MechanicsEntity updtEntity, MechanicsEntity data) {
+        if (data == null) {
+            return null;
+        }
+
+        if (data.getName() != null) {
+            updtEntity.setName(data.getName());
+        }
+        if (data.getPhone() != null) {
+            updtEntity.setPhone(data.getPhone());
+        }
+        return updtEntity;
     }
 }

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import pmoc.DTOs.mechaniciansDTO.ResponseMechanicDTO;
 import pmoc.entities.MechanicsEntity;
 import pmoc.exceptions.customs.NotFoundException;
+import pmoc.mapper.MechanicMapper;
 import pmoc.repositories.MechanicsRepository;
 import pmoc.services.MechanicsService;
 
@@ -18,6 +19,7 @@ import pmoc.services.MechanicsService;
 public class MechanicsServiceImpl implements MechanicsService {
 
     private final MechanicsRepository mechanicsRepository;
+    private final MechanicMapper mechanicMapper;
 
     @Override
     public Page<MechanicsEntity> getAllMechanics(int pageNum, int pageSize) {
@@ -31,16 +33,13 @@ public class MechanicsServiceImpl implements MechanicsService {
     }
 
     @Override
-    public ResponseMechanicDTO updtMechanic(MechanicsEntity mechanic, Long id) {
+    public ResponseMechanicDTO updtMechanic(MechanicsEntity data, Long id) {
         MechanicsEntity mech = mechanicsRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Mechanic with id " + id + " Not found")
         );
-
-        mech.setName(mechanic.getName());
-        mech.setPhone(mechanic.getPhone());
+        mech = mechanicMapper.partialUpdate(mech, data);
         mechanicsRepository.save(mech);
-
-        return new ResponseMechanicDTO(mechanic.getName(), mechanic.getPhone());
+        return new ResponseMechanicDTO(mech.getName(), mech.getPhone());
     }
 
     @Override

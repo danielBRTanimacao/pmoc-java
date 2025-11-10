@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pmoc.DTOs.OrderDTO.ResponseOrderDTO;
 import pmoc.entities.OrderEntity;
 import pmoc.exceptions.customs.NotFoundException;
+import pmoc.mapper.OrderMapper;
 import pmoc.repositories.OrdersRepository;
 import pmoc.services.OrdersService;
 
@@ -15,6 +16,7 @@ import pmoc.services.OrdersService;
 @RequiredArgsConstructor
 public class OrdersServiceImpl implements OrdersService {
     private final OrdersRepository ordersRepository;
+    private final OrderMapper orderMapper;
 
     @Override
     public Page<OrderEntity> getAllOrders(int pagNum, int pageSize) {
@@ -25,12 +27,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public ResponseOrderDTO createOrder(OrderEntity order) {
         ordersRepository.save(order);
-        return new ResponseOrderDTO(
-                order.getClientId().getName(),
-                order.getMecId().getName(),
-                order.getOrderPosition(),
-                order.getPayment()
-        );
+        return orderMapper.toDTO(order);
     }
 
     @Override
@@ -39,11 +36,7 @@ public class OrdersServiceImpl implements OrdersService {
                 () -> new NotFoundException("Order with id " + id + " not found")
         );
 
-        order.setClientId(data.getClientId());
-        order.setMecId(data.getMecId());
-        order.setPayment(data.getPayment());
-        order.setProblem(data.getProblem());
-        order.setObservations(data.getObservations());
+        order = orderMapper.partialUpdate(order, data);
         return ordersRepository.save(order);
     }
 
