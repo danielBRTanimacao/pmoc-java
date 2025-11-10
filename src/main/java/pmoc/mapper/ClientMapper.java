@@ -5,4 +5,5 @@ import pmoc.entities.ClientsEntity;
 
 public interface ClientMapper {
     ClientsEntity toEntity(RequestClientDTO data);
+    ClientsEntity partialUpdate(ClientsEntity updtEntity, ClientsEntity data);
 }

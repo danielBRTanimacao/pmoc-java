@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import pmoc.DTOs.clientsDTO.ResponseClientDTO;
 import pmoc.entities.ClientsEntity;
 import pmoc.exceptions.customs.NotFoundException;
+import pmoc.mapper.ClientMapper;
 import pmoc.repositories.ClientsRepository;
 import pmoc.services.ClientService;
 
@@ -18,6 +19,7 @@ import pmoc.services.ClientService;
 public class ClientServiceImpl implements ClientService{
 
     private final ClientsRepository clientRepository;
+    private final ClientMapper clientMapper;
 
     @Override
     public Page<ClientsEntity> getAllClients(int pageNum, int pageSize) {
@@ -37,9 +39,7 @@ public class ClientServiceImpl implements ClientService{
                 () -> new NotFoundException("Client with id=" + id + " not found")
         );
 
-        preSave.setName(data.getName());
-        preSave.setAddress(data.getAddress());
-        preSave.setPhone(data.getPhone());
+        preSave = clientMapper.partialUpdate(preSave, data);
         clientRepository.save(preSave);
         return new ResponseClientDTO(preSave.getName(), preSave.getAddress());
     }

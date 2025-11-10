@@ -29,7 +29,6 @@ public class ClientsControllerImpl implements ClientsController {
     @Override
     public ResponseEntity<ResponseClientDTO> addNewClient(@Valid RequestClientDTO data) {
         ClientsEntity preClient = clientMapper.toEntity(data);
-
         return new ResponseEntity<>(clientService.createClient(preClient), HttpStatus.CREATED);
     }
 

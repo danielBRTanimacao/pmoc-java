@@ -22,4 +22,29 @@ public class ClientMapperImpl implements ClientMapper {
 
         return entity;
     }
+
+    @Override
+    public ClientsEntity partialUpdate(ClientsEntity updtEntity, ClientsEntity data) {
+        if (data == null) {
+            return null;
+        }
+
+        if (data.getName() != null) {
+            updtEntity.setName(data.getName());
+        }
+        if (data.getPhone() != null) {
+            updtEntity.setPhone(data.getPhone());
+        }
+        if (data.getAddress() != null) {
+            updtEntity.setAddress(data.getAddress());
+        }
+        if (data.getRoom() != null) {
+            updtEntity.setRoom(data.getRoom());
+        }
+        if (data.getDepartment() != null) {
+            updtEntity.setDepartment(data.getDepartment());
+        }
+
+        return updtEntity;
+    }
 }
