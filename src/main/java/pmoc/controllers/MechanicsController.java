@@ -18,7 +18,7 @@ public interface MechanicsController {
     );
 
     @PostMapping
-    ResponseEntity<MechanicsEntity> addNewMechanic(@Valid @RequestBody RequestMechanicianDTO data);
+    ResponseEntity<ResponseMechanicDTO> addNewMechanic(@Valid @RequestBody RequestMechanicianDTO data);
 
     @PutMapping("/{id}")
     ResponseEntity<ResponseMechanicDTO> updateMechanic(

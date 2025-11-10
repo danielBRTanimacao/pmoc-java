@@ -27,7 +27,7 @@ public class MechanicsControllerImpl implements MechanicsController {
     }
 
     @Override
-    public ResponseEntity<MechanicsEntity> addNewMechanic(RequestMechanicianDTO data) {
+    public ResponseEntity<ResponseMechanicDTO> addNewMechanic(RequestMechanicianDTO data) {
         MechanicsEntity preMechanic = mechanicMapper.toEntity(data);
         return new ResponseEntity<>(mechanicsService.createNewMechanic(preMechanic), HttpStatus.CREATED);
     }

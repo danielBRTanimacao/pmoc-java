@@ -30,7 +30,7 @@ public class OrderEntity {
     private Long orderPosition;
     private String problem;
 
-    private BigDecimal payment;
+    private BigDecimal price;
 
     private String observations;
 

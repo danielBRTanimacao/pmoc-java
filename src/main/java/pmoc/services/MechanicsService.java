@@ -7,7 +7,7 @@ import pmoc.entities.MechanicsEntity;
 
 public interface MechanicsService {
     Page<MechanicsEntity> getAllMechanics(int pageNum, int pageSize);
-    MechanicsEntity createNewMechanic(MechanicsEntity data);
+    ResponseMechanicDTO createNewMechanic(MechanicsEntity data);
     ResponseMechanicDTO updtMechanic(MechanicsEntity mechanic, Long id);
     void delMechanic(Long id);
 }

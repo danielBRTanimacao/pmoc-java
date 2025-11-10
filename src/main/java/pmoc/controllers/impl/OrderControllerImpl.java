@@ -31,7 +31,7 @@ public class OrderControllerImpl implements OrderController {
     }
 
     @Override
-    public ResponseEntity<OrderEntity> updateOrder(RequestOrderDTO data, Long id) {
+    public ResponseEntity<ResponseOrderDTO> updateOrder(RequestOrderDTO data, Long id) {
         OrderEntity preOrder = orderMapper.toEntity(data);
         return ResponseEntity.ok().body(ordersService.updtOrder(preOrder , id));
     }

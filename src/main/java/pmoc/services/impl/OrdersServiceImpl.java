@@ -31,13 +31,14 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public OrderEntity updtOrder(OrderEntity data, Long id) {
+    public ResponseOrderDTO updtOrder(OrderEntity data, Long id) {
         OrderEntity order = ordersRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Order with id " + id + " not found")
         );
 
         order = orderMapper.partialUpdate(order, data);
-        return ordersRepository.save(order);
+        ordersRepository.save(order);
+        return new ResponseOrderDTO(order.getClientId().getName(), order.getMecId().getName(), order.getOrderPosition(), order.getPrice());
     }
 
     @Override

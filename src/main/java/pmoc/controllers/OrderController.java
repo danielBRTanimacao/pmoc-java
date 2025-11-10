@@ -43,7 +43,7 @@ public interface OrderController {
             content = @Content(schema = @Schema(implementation = OrderEntity.class)))
     @ApiResponse(responseCode = "404", description = "Pedido não encontrado")
     @PutMapping("/{id}")
-    ResponseEntity<OrderEntity> updateOrder(
+    ResponseEntity<ResponseOrderDTO> updateOrder(
             @Parameter(description = "ID do pedido para ser atualizad.", example = "1")
             @Valid
             @RequestBody RequestOrderDTO data,

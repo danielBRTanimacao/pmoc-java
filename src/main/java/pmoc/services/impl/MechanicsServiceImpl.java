@@ -28,8 +28,9 @@ public class MechanicsServiceImpl implements MechanicsService {
     }
 
     @Override
-    public MechanicsEntity createNewMechanic(MechanicsEntity data) {
-        return mechanicsRepository.save(data);
+    public ResponseMechanicDTO createNewMechanic(MechanicsEntity data) {
+        MechanicsEntity mec = mechanicsRepository.save(data);
+        return new ResponseMechanicDTO(mec.getName(), mec.getPhone());
     }
 
     @Override
