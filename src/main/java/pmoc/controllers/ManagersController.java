@@ -13,5 +13,5 @@ public interface ManagersController {
     @PutMapping
     ResponseEntity<?> updateManager(@Valid @RequestBody RequestManagerDTO data);
     @DeleteMapping
-    ResponseEntity<?> deleteManager(@Valid @RequestBody RequestManagerDTO data);
+    ResponseEntity<?> deleteManager();
 }
