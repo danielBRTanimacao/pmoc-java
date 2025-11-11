@@ -1,26 +1,50 @@
 package pmoc.controllers.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RestController;
+import pmoc.DTOs.managersDTO.LoginManagerDTO;
 import pmoc.DTOs.managersDTO.RequestManagerDTO;
+import pmoc.DTOs.managersDTO.RequestTokenDTO;
+import pmoc.DTOs.managersDTO.ResponseTokenDTO;
 import pmoc.controllers.ManagersController;
+import pmoc.mapper.ManagerMapper;
+import pmoc.services.ManagersService;
 
 @RestController
 @RequiredArgsConstructor
 public class ManagersControllerImpl implements ManagersController {
+    private final ManagersService managersService;
+    private final ManagerMapper managerMapper;
+
+    @Override
+    public ResponseEntity<?> validateToken(RequestTokenDTO data, Authentication auth) {
+        managersService.validToken(data.token(), auth);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<ResponseTokenDTO> loginManager(LoginManagerDTO data) {
+        return ResponseEntity.ok().body(managersService.login(data));
+    }
+
     @Override
     public ResponseEntity<?> createNewManager(RequestManagerDTO data) {
-        return null;
+        managersService.createManager(managerMapper.toEntity(data));
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<?> updateManager(RequestManagerDTO data) {
-        return null;
+    public ResponseEntity<?> updateManager(RequestManagerDTO data, Authentication auth) {
+        managersService.updtManager(managerMapper.toEntity(data), auth);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<?> deleteManager() {
-        return null;
+    public ResponseEntity<?> deleteManager(Authentication auth) {
+        managersService.delManager(auth);
+        return ResponseEntity.noContent().build();
     }
 }

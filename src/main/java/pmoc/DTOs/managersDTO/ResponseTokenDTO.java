@@ -1,6 +1,6 @@
 package pmoc.DTOs.managersDTO;
 
-public record ResponseManagerDTO(
+public record ResponseTokenDTO(
         String token
 ) {
 }
