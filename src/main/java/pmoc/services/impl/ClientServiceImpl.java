@@ -41,7 +41,7 @@ public class ClientServiceImpl implements ClientService{
 
         preSave = clientMapper.partialUpdate(preSave, data);
         clientRepository.save(preSave);
-        return new ResponseClientDTO(preSave.getName(), preSave.getAddress());
+        return clientMapper.toDTO(preSave);
     }
 
     @Override

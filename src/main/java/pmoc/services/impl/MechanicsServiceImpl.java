@@ -29,8 +29,8 @@ public class MechanicsServiceImpl implements MechanicsService {
 
     @Override
     public ResponseMechanicDTO createNewMechanic(MechanicsEntity data) {
-        MechanicsEntity mec = mechanicsRepository.save(data);
-        return new ResponseMechanicDTO(mec.getName(), mec.getPhone());
+        MechanicsEntity mech = mechanicsRepository.save(data);
+        return mechanicMapper.toDto(mech);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MechanicsServiceImpl implements MechanicsService {
         );
         mech = mechanicMapper.partialUpdate(mech, data);
         mechanicsRepository.save(mech);
-        return new ResponseMechanicDTO(mech.getName(), mech.getPhone());
+        return mechanicMapper.toDto(mech);
     }
 
     @Override

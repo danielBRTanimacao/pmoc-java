@@ -2,6 +2,7 @@ package pmoc.mapper.impl;
 
 import org.springframework.stereotype.Component;
 import pmoc.DTOs.clientsDTO.RequestClientDTO;
+import pmoc.DTOs.clientsDTO.ResponseClientDTO;
 import pmoc.entities.ClientsEntity;
 import pmoc.mapper.ClientMapper;
 
@@ -46,5 +47,14 @@ public class ClientMapperImpl implements ClientMapper {
         }
 
         return updtEntity;
+    }
+
+    @Override
+    public ResponseClientDTO toDTO(ClientsEntity data) {
+        if (data == null) {
+            return null;
+        }
+
+        return new ResponseClientDTO(data.getName(), data.getAddress());
     }
 }

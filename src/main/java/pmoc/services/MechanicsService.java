@@ -8,6 +8,6 @@ import pmoc.entities.MechanicsEntity;
 public interface MechanicsService {
     Page<MechanicsEntity> getAllMechanics(int pageNum, int pageSize);
     ResponseMechanicDTO createNewMechanic(MechanicsEntity data);
-    ResponseMechanicDTO updtMechanic(MechanicsEntity mechanic, Long id);
+    ResponseMechanicDTO updtMechanic(MechanicsEntity data, Long id);
     void delMechanic(Long id);
 }

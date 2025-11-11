@@ -2,6 +2,7 @@ package pmoc.mapper.impl;
 
 import org.springframework.stereotype.Component;
 import pmoc.DTOs.mechaniciansDTO.RequestMechanicianDTO;
+import pmoc.DTOs.mechaniciansDTO.ResponseMechanicDTO;
 import pmoc.entities.MechanicsEntity;
 import pmoc.mapper.MechanicMapper;
 
@@ -33,5 +34,14 @@ public class MechanicMapperImpl implements MechanicMapper {
             updtEntity.setPhone(data.getPhone());
         }
         return updtEntity;
+    }
+
+    @Override
+    public ResponseMechanicDTO toDto(MechanicsEntity data) {
+        if (data == null) {
+            return null;
+        }
+
+        return new ResponseMechanicDTO(data.getName(), data.getPhone());
     }
 }
