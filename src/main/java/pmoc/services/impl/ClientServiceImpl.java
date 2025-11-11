@@ -22,6 +22,13 @@ public class ClientServiceImpl implements ClientService{
     private final ClientMapper clientMapper;
 
     @Override
+    public ClientsEntity getClient(Long id) {
+        return clientRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Client with id=" + id + " not found")
+        );
+    }
+
+    @Override
     public Page<ClientsEntity> getAllClients(int pageNum, int pageSize) {
         Pageable pageable = PageRequest.of(pageNum, pageSize, Sort.by("id").descending());
         return clientRepository.findAll(pageable);

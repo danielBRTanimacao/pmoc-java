@@ -22,6 +22,11 @@ public class ClientsControllerImpl implements ClientsController {
     private final ClientMapper clientMapper;
 
     @Override
+    public ResponseEntity<ClientsEntity> getInfoClient(Long id) {
+        return ResponseEntity.ok().body(clientService.getClient(id));
+    }
+
+    @Override
     public ResponseEntity<Page<ClientsEntity>> paginateAllClients(int pageNum, int pageSize) {
         return ResponseEntity.ok().body(clientService.getAllClients(pageNum, pageSize));
     }

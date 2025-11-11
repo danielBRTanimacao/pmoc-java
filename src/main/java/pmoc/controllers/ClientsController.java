@@ -12,6 +12,9 @@ import pmoc.entities.ClientsEntity;
 
 @RequestMapping("/api/clients")
 public interface ClientsController {
+    @GetMapping("/{id}")
+    ResponseEntity<ClientsEntity> getInfoClient(@PathVariable Long id);
+
     @GetMapping
     ResponseEntity<Page<ClientsEntity>> paginateAllClients(
         @RequestParam(defaultValue = "0") int pageNum,
