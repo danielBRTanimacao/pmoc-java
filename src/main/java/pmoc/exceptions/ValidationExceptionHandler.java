@@ -30,7 +30,7 @@ public class ValidationExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Map<String, String>> onValidationError(
+    public ResponseEntity<Map<String, String>> onNotFound(
             NotFoundException ex
     ) {
         Map<String, String> errors = new HashMap<>();
@@ -39,29 +39,27 @@ public class ValidationExceptionHandler {
     }
 
     @ExceptionHandler(JWTAuthException.class)
-    public ResponseEntity<Map<String, String>> onValidationError(
+    public ResponseEntity<Map<String, String>> onJwtAuthError(
             JWTAuthException ex
     ) {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errors, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(SQLException.class)
-    public ResponseEntity<Map<String, String>> onValidationError(
-            SQLException ex
-    ) {
+    public ResponseEntity<Map<String, String>> onSqlError() {
         Map<String, String> errors = new HashMap<>();
-        errors.put("message", ex.getMessage());
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        errors.put("message", "A server error occurred while processing the request.");
+        return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Map<String, String>> onValidationError(
+    public ResponseEntity<Map<String, String>> onAccessDenied(
             AccessDeniedException ex
     ) {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
     }
 }
