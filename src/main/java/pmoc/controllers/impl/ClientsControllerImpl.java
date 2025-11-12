@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import pmoc.DTOs.clientsDTO.PaginateClients;
 import pmoc.DTOs.clientsDTO.RequestClientDTO;
 import pmoc.DTOs.clientsDTO.ResponseClientDTO;
 import pmoc.controllers.ClientsController;
@@ -27,7 +28,7 @@ public class ClientsControllerImpl implements ClientsController {
     }
 
     @Override
-    public ResponseEntity<Page<ClientsEntity>> paginateAllClients(int pageNum, int pageSize) {
+    public ResponseEntity<Page<PaginateClients>> paginateAllClients(int pageNum, int pageSize) {
         return ResponseEntity.ok().body(clientService.getAllClients(pageNum, pageSize));
     }
 

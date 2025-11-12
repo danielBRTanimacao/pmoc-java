@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import pmoc.DTOs.clientsDTO.PaginateClients;
 import pmoc.DTOs.clientsDTO.RequestClientDTO;
 import pmoc.DTOs.clientsDTO.ResponseClientDTO;
 import pmoc.entities.ClientsEntity;
@@ -16,7 +17,7 @@ public interface ClientsController {
     ResponseEntity<ClientsEntity> getInfoClient(@PathVariable Long id);
 
     @GetMapping
-    ResponseEntity<Page<ClientsEntity>> paginateAllClients(
+    ResponseEntity<Page<PaginateClients>> paginateAllClients(
         @RequestParam(defaultValue = "0") int pageNum,
         @RequestParam(defaultValue = "25") int pageSize
     );
