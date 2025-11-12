@@ -13,6 +13,8 @@ import pmoc.controllers.ManagersController;
 import pmoc.mapper.ManagerMapper;
 import pmoc.services.ManagersService;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class ManagersControllerImpl implements ManagersController {
@@ -37,8 +39,8 @@ public class ManagersControllerImpl implements ManagersController {
     }
 
     @Override
-    public ResponseEntity<?> updateManager(RequestManagerDTO data, Authentication auth) {
-        managersService.updtManager(managerMapper.toEntity(data), auth);
+    public ResponseEntity<?> updateManager(RequestManagerDTO data, Authentication auth, UUID id) {
+        managersService.updtManager(managerMapper.toEntity(data), auth, id);
         return ResponseEntity.noContent().build();
     }
 

@@ -15,6 +15,8 @@ import pmoc.repositories.ManagersRepository;
 import pmoc.services.ManagersService;
 import pmoc.services.TokenService;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class ManagersServiceImpl implements ManagersService {
@@ -46,7 +48,7 @@ public class ManagersServiceImpl implements ManagersService {
 
         String token = tokenService.generateToken(manager);
 
-        return new ResponseTokenDTO(token);
+        return new ResponseTokenDTO(manager.getId(), token);
     }
 
     @Override
@@ -55,14 +57,18 @@ public class ManagersServiceImpl implements ManagersService {
     }
 
     @Override
-    public void updtManager(ManagersEntity data, Authentication auth) {
-        Object principal = auth.getPrincipal();
+    public void updtManager(ManagersEntity data, Authentication auth, UUID id) {
+        ManagersEntity authenticatedManager = (ManagersEntity) auth.getPrincipal();
 
-        if (!(principal instanceof ManagersEntity authenticatedManager)) {
-            throw new JWTAuthException("Invalid principal type for authenticated user.");
+        if (!authenticatedManager.getId().equals(id)) {
+            throw new AccessDeniedException("Access denied!");
         }
 
-        ManagersEntity updatedManager = managerMapper.partialUpdate(authenticatedManager, data);
+        ManagersEntity managerToUpdt = managersRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Manager not found!")
+        );
+
+        ManagersEntity updatedManager = managerMapper.partialUpdate(managerToUpdt, data);
         managersRepository.save(updatedManager);
     }
 

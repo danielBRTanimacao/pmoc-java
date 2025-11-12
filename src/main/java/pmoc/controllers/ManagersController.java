@@ -9,6 +9,8 @@ import pmoc.DTOs.managersDTO.RequestManagerDTO;
 import pmoc.DTOs.managersDTO.RequestTokenDTO;
 import pmoc.DTOs.managersDTO.ResponseTokenDTO;
 
+import java.util.UUID;
+
 @RequestMapping("/api/auth")
 public interface ManagersController {
     @PostMapping("/token")
@@ -17,8 +19,12 @@ public interface ManagersController {
     ResponseEntity<ResponseTokenDTO> loginManager(@Valid @RequestBody LoginManagerDTO data);
     @PostMapping
     ResponseEntity<?> createNewManager(@Valid @RequestBody RequestManagerDTO data);
-    @PutMapping
-    ResponseEntity<?> updateManager(@Valid @RequestBody RequestManagerDTO data, Authentication auth);
+    @PutMapping("/{id}")
+    ResponseEntity<?> updateManager(
+            @Valid @RequestBody RequestManagerDTO data,
+            Authentication auth,
+            @PathVariable UUID id
+    );
     @DeleteMapping
     ResponseEntity<?> deleteManager(Authentication auth);
 }
