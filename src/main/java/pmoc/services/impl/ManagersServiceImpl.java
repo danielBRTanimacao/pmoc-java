@@ -73,7 +73,13 @@ public class ManagersServiceImpl implements ManagersService {
     }
 
     @Override
-    public void delManager(Authentication auth) {
+    public void delManager(Authentication auth, UUID id) {
+        ManagersEntity authenticatedManager = (ManagersEntity) auth.getPrincipal();
 
+        if (!authenticatedManager.getId().equals(id)) {
+            throw new AccessDeniedException("Access denied!");
+        }
+
+        managersRepository.deleteById(id);
     }
 }

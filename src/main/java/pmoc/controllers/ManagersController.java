@@ -26,5 +26,5 @@ public interface ManagersController {
             @PathVariable UUID id
     );
     @DeleteMapping
-    ResponseEntity<?> deleteManager(Authentication auth);
+    ResponseEntity<?> deleteManager(Authentication auth, UUID id);
 }

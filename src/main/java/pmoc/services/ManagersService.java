@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface ManagersService {
     void createManager(ManagersEntity data);
     void updtManager(ManagersEntity data, Authentication auth, UUID id);
-    void delManager(Authentication auth);
+    void delManager(Authentication auth, UUID id);
     ResponseTokenDTO login(LoginManagerDTO data);
     void validToken(String token, Authentication auth);
 }

@@ -45,8 +45,8 @@ public class ManagersControllerImpl implements ManagersController {
     }
 
     @Override
-    public ResponseEntity<?> deleteManager(Authentication auth) {
-        managersService.delManager(auth);
+    public ResponseEntity<?> deleteManager(Authentication auth, UUID id) {
+        managersService.delManager(auth, id);
         return ResponseEntity.noContent().build();
     }
 }
