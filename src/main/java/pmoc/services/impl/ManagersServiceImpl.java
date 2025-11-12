@@ -1,6 +1,7 @@
 package pmoc.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import pmoc.DTOs.managersDTO.ResponseTokenDTO;
 import pmoc.entities.ManagersEntity;
 import pmoc.exceptions.customs.JWTAuthException;
 import pmoc.exceptions.customs.NotFoundException;
+import pmoc.mapper.ManagerMapper;
 import pmoc.repositories.ManagersRepository;
 import pmoc.services.ManagersService;
 import pmoc.services.TokenService;
@@ -18,6 +20,7 @@ import pmoc.services.TokenService;
 public class ManagersServiceImpl implements ManagersService {
 
     private final ManagersRepository managersRepository;
+    private final ManagerMapper managerMapper;
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
 
@@ -53,7 +56,14 @@ public class ManagersServiceImpl implements ManagersService {
 
     @Override
     public void updtManager(ManagersEntity data, Authentication auth) {
+        Object principal = auth.getPrincipal();
 
+        if (!(principal instanceof ManagersEntity authenticatedManager)) {
+            throw new JWTAuthException("Invalid principal type for authenticated user.");
+        }
+
+        ManagersEntity updatedManager = managerMapper.partialUpdate(authenticatedManager, data);
+        managersRepository.save(updatedManager);
     }
 
     @Override

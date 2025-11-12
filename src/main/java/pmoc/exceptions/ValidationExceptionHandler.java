@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pmoc.exceptions.customs.JWTAuthException;
 import pmoc.exceptions.customs.NotFoundException;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +40,15 @@ public class ValidationExceptionHandler {
     @ExceptionHandler(JWTAuthException.class)
     public ResponseEntity<Map<String, String>> onValidationError(
             JWTAuthException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<Map<String, String>> onValidationError(
+            SQLException ex
     ) {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());

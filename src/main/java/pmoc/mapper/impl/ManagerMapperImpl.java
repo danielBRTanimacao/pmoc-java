@@ -1,5 +1,7 @@
 package pmoc.mapper.impl;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pmoc.DTOs.managersDTO.RequestManagerDTO;
 import pmoc.entities.ManagersEntity;
@@ -8,7 +10,10 @@ import pmoc.entities.enums.manager.StatusEnum;
 import pmoc.mapper.ManagerMapper;
 
 @Component
+@RequiredArgsConstructor
 public class ManagerMapperImpl implements ManagerMapper {
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public ManagersEntity toEntity(RequestManagerDTO data) {
         if (data == null) {
@@ -26,6 +31,16 @@ public class ManagerMapperImpl implements ManagerMapper {
 
     @Override
     public ManagersEntity partialUpdate(ManagersEntity updtEntity, ManagersEntity data) {
-        return null;
+        if (data == null) {
+            return null;
+        }
+
+        if (data.getUsername() != null) {
+            updtEntity.setUsername(data.getUsername());
+        }
+        if (data.getPassword() != null) {
+            updtEntity.setPassword(passwordEncoder.encode(data.getPassword()));
+        }
+        return updtEntity;
     }
 }
