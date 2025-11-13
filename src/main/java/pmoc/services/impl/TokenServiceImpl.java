@@ -29,7 +29,7 @@ public class TokenServiceImpl implements TokenService {
 
             return JWT.create()
                     .withIssuer("login-auth-api")
-                    .withSubject(manager.getEmail())
+                    .withSubject(manager.getUsername())
                     .withExpiresAt(this.generateExpirationTime())
                     .sign(algorithm);
 

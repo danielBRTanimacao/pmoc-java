@@ -35,7 +35,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var login = tokenService.validateToken(token);
 
         if(login != null){
-            ManagersEntity manager = managersRepository.findByEmail(login).orElseThrow(
+            ManagersEntity manager = managersRepository.findByUsername(login).orElseThrow(
                     () -> new NotFoundException("User Not Found")
             );
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));

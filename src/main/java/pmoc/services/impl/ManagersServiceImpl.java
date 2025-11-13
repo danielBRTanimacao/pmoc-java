@@ -39,7 +39,7 @@ public class ManagersServiceImpl implements ManagersService {
 
     @Override
     public ResponseTokenDTO login(LoginManagerDTO data) {
-        ManagersEntity manager = managersRepository.findByEmail(data.email()).orElseThrow(
+        ManagersEntity manager = managersRepository.findByUsername(data.username()).orElseThrow(
                 () -> new NotFoundException("Manager not found!")
         );
 
