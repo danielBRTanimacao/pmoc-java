@@ -36,7 +36,7 @@ public class ManagersEntity {
     @LastModifiedDate
     private LocalDateTime updated_at;
 
-    public boolean IsExpiredToken() {
+    public boolean isExpiredToken() {
         LocalDateTime max_time = this.created_at.plusMinutes(30);
         LocalDateTime time_actual = LocalDateTime.now();
 

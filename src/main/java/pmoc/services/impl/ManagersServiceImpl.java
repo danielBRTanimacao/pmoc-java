@@ -66,7 +66,7 @@ public class ManagersServiceImpl implements ManagersService {
         if (managerToValidate.getToken().equals("VALID")) {
             throw new InvalidTokenException("Token is valid");
         }
-        if (managerToValidate.IsExpiredToken()) {
+        if (managerToValidate.isExpiredToken()) {
             throw new InvalidTokenException("Token is expired");
         }
         if (!managerToValidate.getToken().equals(token)) {

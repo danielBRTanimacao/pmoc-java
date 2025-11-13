@@ -2,7 +2,6 @@ package pmoc.components;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.Random;
 
 @Component
