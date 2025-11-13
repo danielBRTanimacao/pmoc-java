@@ -12,5 +12,5 @@ public interface ManagersService {
     void updtManager(ManagersEntity data, Authentication auth, UUID id);
     void delManager(Authentication auth, UUID id);
     ResponseTokenDTO login(LoginManagerDTO data);
-    void validToken(String token, Authentication auth);
+    void validToken(String token, Authentication auth, UUID id);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pmoc.DTOs.managersDTO.LoginManagerDTO;
 import pmoc.DTOs.managersDTO.ResponseTokenDTO;
 import pmoc.entities.ManagersEntity;
+import pmoc.exceptions.customs.InvalidTokenException;
 import pmoc.exceptions.customs.JWTAuthException;
 import pmoc.exceptions.customs.NotFoundException;
 import pmoc.mapper.ManagerMapper;
@@ -52,8 +53,27 @@ public class ManagersServiceImpl implements ManagersService {
     }
 
     @Override
-    public void validToken(String token, Authentication auth) {
+    public void validToken(String token, Authentication auth, UUID id) {
+        ManagersEntity authenticatedManager = (ManagersEntity) auth.getPrincipal();
 
+        if (!authenticatedManager.getId().equals(id)) {
+            throw new AccessDeniedException("Access denied!");
+        }
+
+        ManagersEntity managerToValidate = managersRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Manager not found!")
+        );
+        if (managerToValidate.getToken().equals("VALID")) {
+            throw new InvalidTokenException("Token is valid");
+        }
+        if (managerToValidate.IsExpiredToken()) {
+            throw new InvalidTokenException("Token is expired");
+        }
+        if (!managerToValidate.getToken().equals(token)) {
+            throw new InvalidTokenException("Token is not valid");
+        }
+        managerToValidate.setToken("VALID");
+        managersRepository.save(managerToValidate);
     }
 
     @Override

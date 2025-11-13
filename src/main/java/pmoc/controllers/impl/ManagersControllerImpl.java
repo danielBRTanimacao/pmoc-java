@@ -22,8 +22,8 @@ public class ManagersControllerImpl implements ManagersController {
     private final ManagerMapper managerMapper;
 
     @Override
-    public ResponseEntity<?> validateToken(RequestTokenDTO data, Authentication auth) {
-        managersService.validToken(data.token(), auth);
+    public ResponseEntity<?> validateToken(RequestTokenDTO data, Authentication auth, UUID id) {
+        managersService.validToken(data.token(), auth, id);
         return ResponseEntity.ok().build();
     }
 

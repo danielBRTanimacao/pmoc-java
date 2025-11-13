@@ -13,8 +13,8 @@ import java.util.UUID;
 
 @RequestMapping("/api/auth")
 public interface ManagersController {
-    @PostMapping("/token")
-    ResponseEntity<?> validateToken(@Valid @RequestBody RequestTokenDTO data, Authentication auth);
+    @PostMapping("/token/{id}")
+    ResponseEntity<?> validateToken(@Valid @RequestBody RequestTokenDTO data, Authentication auth, @PathVariable UUID id);
     @PostMapping("/login")
     ResponseEntity<ResponseTokenDTO> loginManager(@Valid @RequestBody LoginManagerDTO data);
     @PostMapping

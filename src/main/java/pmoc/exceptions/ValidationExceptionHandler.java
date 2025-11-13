@@ -6,9 +6,11 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import pmoc.exceptions.customs.InvalidTokenException;
 import pmoc.exceptions.customs.JWTAuthException;
 import pmoc.exceptions.customs.NotFoundException;
 
+import javax.naming.directory.InvalidAttributesException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +47,15 @@ public class ValidationExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<Map<String, String>> onAccessDenied(
+            InvalidTokenException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(SQLException.class)
