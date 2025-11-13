@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pmoc.DTOs.managersDTO.RequestManagerDTO;
+import pmoc.components.TokenGenerator;
 import pmoc.entities.ManagersEntity;
 import pmoc.entities.enums.manager.SignaturesEnum;
 import pmoc.entities.enums.manager.StatusEnum;
@@ -23,6 +24,7 @@ public class ManagerMapperImpl implements ManagerMapper {
         entity.setUsername(data.username());
         entity.setEmail(data.email());
         entity.setPassword(data.password());
+        entity.setToken(TokenGenerator.sixCharToken());
         entity.setStatus(StatusEnum.PENDING);
         entity.setSignature(SignaturesEnum.FREE);
 

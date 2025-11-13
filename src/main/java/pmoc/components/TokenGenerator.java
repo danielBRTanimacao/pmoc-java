@@ -1,0 +1,25 @@
+package pmoc.components;
+
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.Random;
+
+@Component
+public class TokenGenerator {
+    public static String sixCharToken() {
+        Random random = new Random();
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder token = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            token.append(
+                    characters.charAt(
+                            random.nextInt(
+                                    characters.length()
+                            )
+                    )
+            );
+        }
+        return token.toString();
+    }
+}
